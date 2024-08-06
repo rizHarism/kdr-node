@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const dotenv = require("dotenv");
+dotenv.config();
 require("./utils/db");
 const Product = require("./model/products");
 const Partner = require("./model/partners");
@@ -7,7 +9,7 @@ const General = require("./model/general");
 const About = require("./model/about");
 const { uploadHandler } = require("./utils/multer-config");
 const fs = require("fs");
-const port = 80;
+port = process.env.PORT;
 
 // built in middleware
 app.use(express.static("public"));
