@@ -1,6 +1,9 @@
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://127.0.0.1:27017/kdr');
+const mongoose = require("mongoose");
+const Product = require("./../model/products");
+const Partner = require("./../model/partners");
+const General = require("./../model/general");
+const About = require("./../model/about");
+mongoose.connect("mongodb://127.0.0.1:27017/kdr");
 
 // const product2 = new Product({
 //     id: 2,
@@ -16,3 +19,5 @@ mongoose.connect('mongodb://127.0.0.1:27017/kdr');
 //     image: "it_web_development.png",
 //     description: "<p>Revolusi Industri Digital dan kebiasaan baru karena pandemi global telah mendorong kita untuk semakin memanfaatkan teknologi informasi dalam kehidupan sehari-hari. Kehadiran sistem & teknologi informasi sudah menjadi kebutuhan wajib untuk mempermudah akses dan distribusi informasi kepada masyarakat.</p><p>Layanan yang kami berikan dalam jasa <b>IT - WEB DEVELOPMENT</b> ini antara lain :</p><ul><li>WebGIS</li><li>Web Design & Programming</li><li>Web Hosting</li><li>Pembuatan Database System</li><li>Pembuatan Aplikasi Sistem Informasi</li></ul>"
 // })
+
+module.exports = { Product, Partner, General, About };
