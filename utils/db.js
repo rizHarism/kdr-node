@@ -1,9 +1,10 @@
+const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const Product = require("./../model/products");
 const Partner = require("./../model/partners");
 const General = require("./../model/general");
 const About = require("./../model/about");
-mongoose.connect("mongodb://127.0.0.1:27017/kdr");
+mongoose.connect(process.env.ATLAS_URI);
 
 // const product2 = new Product({
 //     id: 2,
