@@ -1,9 +1,9 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const Product = require("./../model/products");
-const Partner = require("./../model/partners");
-const General = require("./../model/general");
-const About = require("./../model/about");
+const Product = require("../models/products");
+const Partner = require("../models/partners");
+const General = require("../models/general");
+const About = require("../models/about");
 mongoose.connect(process.env.ATLAS_URI);
 
 // const product2 = new Product({
