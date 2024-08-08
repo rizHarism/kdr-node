@@ -37,19 +37,31 @@ app.get("/general", (req, res) => {
 
 app.get("/about", (req, res) => {
   About.find().then((about) => {
-    res.status(200).json(about);
+    if (about.length > 0) {
+      res.status(200).json(about);
+    } else {
+      res.status(404).send("data not found");
+    }
   });
 });
 
 app.get("/products", (req, res) => {
   Product.find().then((product) => {
-    res.status(200).json(product);
+    if (product.length > 0) {
+      res.status(200).json(product);
+    } else {
+      res.status(404).send("data not found");
+    }
   });
 });
 
 app.get("/partners", (req, res) => {
   Partner.find().then((partner) => {
-    res.status(200).json(partner);
+    if (partner.length > 0) {
+      res.status(200).json(partner);
+    } else {
+      res.status(404).send("data not found");
+    }
   });
 });
 
