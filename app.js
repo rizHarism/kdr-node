@@ -16,7 +16,11 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).send("KDR /api");
+  let home = {
+    appName: "KDR /api",
+    version: 0.1,
+  };
+  res.status(200).json(home);
 });
 
 app.use(appRouter);
