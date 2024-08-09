@@ -1,4 +1,4 @@
-const { Partner } = require("../../utils/db");
+const Partner = require("../../models/partners");
 
 async function get(req, res) {
   Partner.find().then((partner) => {
