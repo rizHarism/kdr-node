@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const authRouter = require("./auth");
 const aboutController = require("../controllers/about.controller");
 const generalController = require("../controllers/general.controller");
 const partnerController = require("../controllers/partner.controller");
@@ -20,6 +21,9 @@ router.get("/", (req, res) => {
     });
   }
 });
+
+// register user use authRouter
+router.use("/user", authRouter);
 
 router.get("/about", aboutController.get);
 
