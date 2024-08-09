@@ -5,6 +5,22 @@ const generalController = require("../controllers/general.controller");
 const partnerController = require("../controllers/partner.controller");
 const productController = require("../controllers/product.controller");
 
+router.get("/", (req, res) => {
+  try {
+    res.status(200).json({
+      status: "success",
+      appName: "KDR /API",
+      version: 0.1,
+      message: "Welcome to our KDR Application Programming Interface",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
+    });
+  }
+});
+
 router.get("/about", aboutController.get);
 
 router.get("/general", generalController.get);

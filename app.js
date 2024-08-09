@@ -1,26 +1,26 @@
 const express = require("express");
-const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
 const { uploadHandler } = require("./utils/multer-config");
 const fs = require("fs");
 const port = process.env.PORT;
-const appRouter = require("./src/routes/router");
+const appRouter = require("./src/routes/index");
+const app = express();
 
+app.use(cors());
+app.disable("x-powered-by"); //Reduce fingerprinting
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 // built in middleware
 app.use(express.static("public"));
 // application level middleware
 app.use((req, res, next) => {
   console.log("Time:", Date.now());
   next();
-});
-
-app.get("/", (req, res) => {
-  let home = {
-    appName: "KDR /api",
-    version: 0.1,
-  };
-  res.status(200).json(home);
 });
 
 app.use(appRouter);
