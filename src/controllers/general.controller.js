@@ -1,4 +1,4 @@
-const { General } = require("../../utils/db");
+const General = require("../../models/general");
 
 async function get(req, res) {
   General.find().then((general) => {

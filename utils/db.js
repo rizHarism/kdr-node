@@ -1,7 +1,6 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const Product = require("../models/products");
-const Characteristic = require("../models/characteristic");
 const Partner = require("../models/partners");
 const General = require("../models/general");
 const About = require("../models/about");

@@ -1,5 +1,4 @@
-const { About } = require("../../utils/db");
-
+const About = require("../../models/about");
 async function get(req, res) {
   About.find().then((about) => {
     if (about.length > 0) {
