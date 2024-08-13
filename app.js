@@ -33,8 +33,12 @@ app.post("/user", uploadHandler.single("image"), (req, res) => {
 
 // response 404
 app.use((req, res) => {
-  res.status(404);
-  res.send("404 not found");
+  res.status(404).json({
+    status: "not found",
+    code: 404,
+    // data: [],
+    message: "Page Not Found",
+  });
 });
 
 app.listen(port, () => {
