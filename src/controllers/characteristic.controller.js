@@ -1,9 +1,21 @@
 const { Characteristic } = require("../../utils/db");
+const dotenv = require("dotenv");
+dotenv.config();
+const appUrl = process.env.APP_URL;
 
 async function get(req, res) {
-  Characteristic.find().then((character) => {
+  await Characteristic.find().then((character) => {
     if (character.length > 0) {
-      res.status(200).send(character);
+      character.map((val) => {
+        val.image = appUrl + val.image;
+      });
+      res.status(200).json({
+        status: "success",
+        code: 200,
+        path: "/characteristic",
+        data: character,
+        message: "Data about successfully retrieved",
+      });
     } else {
       res.status(404).send("data not found");
     }

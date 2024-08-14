@@ -1,9 +1,21 @@
 const Product = require("../../models/products");
+const dotenv = require("dotenv");
+dotenv.config();
+const appUrl = process.env.APP_URL;
 
 async function get(req, res) {
-  Product.find().then((product) => {
+  await Product.find().then((product) => {
     if (product.length > 0) {
-      res.status(200).send(product);
+      product.map((val) => {
+        val.image = appUrl + val.image;
+      });
+      res.status(200).json({
+        status: "success",
+        code: 200,
+        path: "/products",
+        data: product,
+        message: "Data about successfully retrieved",
+      });
     } else {
       res.status(404).send("data not found");
     }
