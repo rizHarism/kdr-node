@@ -55,18 +55,23 @@ async function Login(req, res) {
       return res.status(401).json({
         status: "failed",
         data: [],
-        message: "Invalid username or password. Please try again with the correct credentials.",
+        message:
+          "Invalid username or password. Please try again with the correct credentials.",
       });
     // if user exists
     // validate password
-    const isPasswordValid = await bcrypt.compare(`${req.body.password}`, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      `${req.body.password}`,
+      user.password
+    );
     // if not valid, return unathorized response
 
     if (!isPasswordValid)
       return res.status(401).json({
         status: "failed",
         data: [],
-        message: "Invalid email or password. Please try again with the correct credentials.",
+        message:
+          "Invalid email or password. Please try again with the correct credentials.",
       });
 
     let options = {
@@ -86,6 +91,7 @@ async function Login(req, res) {
       data: [user_data],
       message: "You have successfully logged in.",
     });
+    // res.redirect("/about");
   } catch (err) {
     res.status(500).json({
       status: "error",

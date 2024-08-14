@@ -7,6 +7,7 @@ const characteristicController = require("../controllers/characteristic.controll
 const generalController = require("../controllers/general.controller");
 const partnerController = require("../controllers/partner.controller");
 const productController = require("../controllers/product.controller");
+const { Verify } = require("../../middleware/verify");
 
 // router.get("/", (req, res) => {
 //   try {
@@ -29,14 +30,14 @@ router.use("/user", authRouter);
 
 router.get("/", homeController.get);
 
-router.get("/about", aboutController.get);
+router.get("/about", Verify, aboutController.get);
 
-router.get("/general", generalController.get);
+router.get("/general", Verify, generalController.get);
 
-router.get("/partners", partnerController.get);
+router.get("/partners", Verify, partnerController.get);
 
-router.get("/products", productController.get);
+router.get("/products", Verify, productController.get);
 
-router.get("/characteristic", characteristicController.get);
+router.get("/characteristic", Verify, characteristicController.get);
 
 module.exports = router;

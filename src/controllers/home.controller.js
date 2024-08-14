@@ -1,5 +1,12 @@
-const { About, General, Partner, Product, Characteristic } = require("../../utils/db");
+const {
+  About,
+  General,
+  Partner,
+  Product,
+  Characteristic,
+} = require("../../utils/db");
 const dotenv = require("dotenv");
+dotenv.config();
 
 async function get(req, res) {
   const appUrl = process.env.APP_URL;
@@ -9,11 +16,13 @@ async function get(req, res) {
       return about;
     });
     const characteristic = await Characteristic.find({}, { _id: 0, __v: 0 });
-    const general = await General.findOne({}, { _id: 0, __v: 0 }).then((general) => {
-      general.logoImage = appUrl + general.logoImage;
-      general.heroImage = appUrl + general.heroImage;
-      return general;
-    });
+    const general = await General.findOne({}, { _id: 0, __v: 0 }).then(
+      (general) => {
+        general.logoImage = appUrl + general.logoImage;
+        general.heroImage = appUrl + general.heroImage;
+        return general;
+      }
+    );
     const partners = await Partner.find({}, { _id: 0, __v: 0 });
     const products = await Product.find({}, { _id: 0, __v: 0 });
 

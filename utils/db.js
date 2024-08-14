@@ -1,5 +1,6 @@
-const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 const Product = require("../models/products");
 const Characteristic = require("../models/characteristic");
 const Partner = require("../models/partners");
