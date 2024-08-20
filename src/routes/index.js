@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const authRouter = require("./auth");
 const homeController = require("../controllers/home.controller");
+const articlesController = require("../controllers/article.controller");
 const aboutController = require("../controllers/about.controller");
 const characteristicController = require("../controllers/characteristic.controller");
 const generalController = require("../controllers/general.controller");
@@ -29,6 +30,9 @@ const { Verify } = require("../../middleware/verify");
 router.use("/user", authRouter);
 
 router.get("/", homeController.get);
+
+router.get("/articles", articlesController.getArticles);
+router.get("/articles/:slug", articlesController.detailArticle);
 
 router.get("/about", Verify, aboutController.get);
 

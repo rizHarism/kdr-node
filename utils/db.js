@@ -6,6 +6,7 @@ const Characteristic = require("../models/characteristic");
 const Partner = require("../models/partners");
 const General = require("../models/general");
 const About = require("../models/about");
+const Articles = require("../models/articles");
 mongoose.connect(process.env.ATLAS_URI);
 
 // const product2 = new Product({
@@ -23,4 +24,4 @@ mongoose.connect(process.env.ATLAS_URI);
 //     description: "<p>Revolusi Industri Digital dan kebiasaan baru karena pandemi global telah mendorong kita untuk semakin memanfaatkan teknologi informasi dalam kehidupan sehari-hari. Kehadiran sistem & teknologi informasi sudah menjadi kebutuhan wajib untuk mempermudah akses dan distribusi informasi kepada masyarakat.</p><p>Layanan yang kami berikan dalam jasa <b>IT - WEB DEVELOPMENT</b> ini antara lain :</p><ul><li>WebGIS</li><li>Web Design & Programming</li><li>Web Hosting</li><li>Pembuatan Database System</li><li>Pembuatan Aplikasi Sistem Informasi</li></ul>"
 // })
 
-module.exports = { Product, Partner, General, About, Characteristic };
+module.exports = { Product, Partner, General, About, Characteristic, Articles };
