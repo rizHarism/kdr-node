@@ -135,6 +135,7 @@ async function up() {
  */
 async function down() {
   // Write migration here
+  Articles.collection.drop();
 }
 
 module.exports = { up, down };

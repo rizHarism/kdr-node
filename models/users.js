@@ -28,6 +28,11 @@ const userSchema = new Schema(
       required: true,
       default: "0x01",
     },
+    avatar: {
+      type: String,
+      required: true,
+      default: "public/image/users/avatar.png",
+    },
   },
   { timestamps: true }
 );
