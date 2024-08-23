@@ -1,8 +1,11 @@
 const User = require("../../models/users");
 const bcrypt = require("bcrypt");
+const dotenv = require("dotenv");
+dotenv.config();
+const appUrl = process.env.APP_URL;
 
 /**
- * @route POST v1/auth/register
+ * @route POST /auth/
  * @desc Register a user
  * @access admin
  */
@@ -50,28 +53,28 @@ async function Login(req, res) {
   const { username } = req.body;
   try {
     // Check if user exists
-    const user = await User.findOne({ username }).select("+password");
+    const user = await User.findOne({ username })
+      .select("+password")
+      .then((user) => {
+        user.avatar = appUrl + user.avatar;
+        return user;
+      });
     if (!user)
       return res.status(401).json({
         status: "failed",
         data: [],
-        message:
-          "Invalid username or password. Please try again with the correct credentials.",
+        message: "Invalid username or password. Please try again with the correct credentials.",
       });
     // if user exists
     // validate password
-    const isPasswordValid = await bcrypt.compare(
-      `${req.body.password}`,
-      user.password
-    );
+    const isPasswordValid = await bcrypt.compare(`${req.body.password}`, user.password);
     // if not valid, return unathorized response
 
     if (!isPasswordValid)
       return res.status(401).json({
         status: "failed",
         data: [],
-        message:
-          "Invalid email or password. Please try again with the correct credentials.",
+        message: "Invalid email or password. Please try again with the correct credentials.",
       });
 
     let options = {
@@ -88,11 +91,12 @@ async function Login(req, res) {
 
     res.status(200).json({
       status: "success",
-      data: [user_data],
+      data: user_data,
       message: "You have successfully logged in.",
     });
     // res.redirect("/about");
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       status: "error",
       code: 500,

@@ -8,6 +8,7 @@ async function get(req, res) {
     if (product.length > 0) {
       product.map((val) => {
         val.image = appUrl + val.image;
+        return val;
       });
       res.status(200).json({
         status: "success",
