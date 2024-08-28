@@ -11,9 +11,11 @@ const port = process.env.PORT;
 const appRouter = require("./src/routes/index");
 const app = express();
 
-app.use(cors(), {
-  // credentials: true,
-});
+app.use(
+  cors({
+    credentials: true,
+  })
+);
 app.disable("x-powered-by"); //Reduce fingerprinting
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
