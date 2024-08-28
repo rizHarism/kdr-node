@@ -12,7 +12,7 @@ const appRouter = require("./src/routes/index");
 const app = express();
 
 app.use(cors(), {
-  credentials: true,
+  // credentials: true,
 });
 app.disable("x-powered-by"); //Reduce fingerprinting
 app.use(cookieParser());
