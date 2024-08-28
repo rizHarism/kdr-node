@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://localhost:3000", "https://kartadayareksabumi.com"],
+    // origin: ["https://localhost:3000", "https://kartadayareksabumi.com"],
     credentials: true,
   })
 );
