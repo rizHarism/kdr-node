@@ -11,8 +11,11 @@ const port = process.env.PORT;
 const appRouter = require("./src/routes/index");
 const app = express();
 
+const allowlist = ["https://localhost:3000", "https://kartadayareksabumi.com"];
+
 app.use(
   cors({
+    origin : allowlist;
     credentials: true,
   })
 );
