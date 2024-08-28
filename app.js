@@ -15,7 +15,7 @@ const allowlist = ["https://localhost", "https://kartadayareksabumi.com"];
 
 app.use(
   cors({
-    origin : allowlist;
+    origin: allowlist,
     credentials: true,
   })
 );
