@@ -14,6 +14,14 @@ const generalSchema = new Schema({
     type: String,
     required: true,
   },
+  subtitle: {
+    type: String,
+    required: true,
+  },
+  aboutImage: {
+    type: String,
+    required: true,
+  },
   description: {
     type: String,
     required: true,

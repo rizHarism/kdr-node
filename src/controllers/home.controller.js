@@ -1,20 +1,17 @@
-const { About, General, Partner, Product, Characteristic } = require("../../utils/db");
+const { General, Characteristic, Product, Partner } = require("../../utils/db");
 const dotenv = require("dotenv");
 dotenv.config();
 
 async function get(req, res) {
   const appUrl = process.env.APP_URL;
   try {
-    const about = await About.findOne({}, { _id: 0, __v: 0 }).then((about) => {
-      about.image = appUrl + about.image;
-      return about;
-    });
-    const characteristic = await Characteristic.find({}, { _id: 0, __v: 0 });
     const general = await General.findOne({}, { _id: 0, __v: 0 }).then((general) => {
       general.logoImage = appUrl + general.logoImage;
       general.heroImage = appUrl + general.heroImage;
+      general.aboutImage = appUrl + general.aboutImage;
       return general;
     });
+    const characteristic = await Characteristic.find({}, { _id: 0, __v: 0 });
     const partners = await Partner.find({}, { _id: 0, __v: 0 });
     const products = await Product.find({}, { _id: 0, __v: 0 });
 
@@ -30,10 +27,10 @@ async function get(req, res) {
       status: "success",
       code: 200,
       data: {
-        about: { ...about._doc, characteristic: mappingArr(characteristic) },
         general,
-        partners: mappingArr(partners),
+        characteristic: mappingArr(characteristic),
         products: mappingArr(products),
+        partners: mappingArr(partners),
       },
       message: "Data successfully retrieved.",
     });

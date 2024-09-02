@@ -11,15 +11,10 @@
 // const General = require("./../model/general");
 // const About = require("./../model/about");
 
-const { Product, Partner, General, About, Characteristic } = require("./../utils/db");
+const { Product, Partner, General, Characteristic } = require("./../utils/db");
 
 async function up() {
   // Write migration here
-  await About.create({
-    image: "img/logo/kdr-logo.png",
-    description:
-      "<p><b>Karta Daya Reksabumi</b> adalah perusahaan konsultan dibidang manajemen data spasial, perencanaan pembangunan wilayah dan pengembangan sistem & teknologi informasi</p><p>Dari tahun 2013 sampai sekarang secara perorangan maupun tim telah banyak pekerjaan - pekerjaan yang dipercayakan pada kami untuk pengerjaan Pemetaan, GIS, Feasibility Study, dan Web Development.</p><p>Kami percaya data geospasial & tata ruang wilayah yang well managed, dianalisa secara tepat dan mampu terintegrasi dengan teknologi informasi yang dapat diakses seluruh stakeholders, akan membantu proses pengambilan keputusan secara komprehensif & sustainable di era Industri Digital saat ini.</p>",
-  });
 
   await Partner.insertMany([
     {
@@ -89,7 +84,10 @@ async function up() {
     logoImage: "img/logo/kdr-logo.png",
     heroImage: "img/logo/hero-image.jpg",
     title: "Karta Daya Reksabumi",
-    description: "Spatial - Planning - IT Development",
+    subtitle: "Spatial - Planning - IT Development",
+    aboutImage: "img/logo/about-image.png",
+    description:
+      "<p><b>Karta Daya Reksabumi</b> adalah perusahaan konsultan dibidang manajemen data spasial, perencanaan pembangunan wilayah dan pengembangan sistem & teknologi informasi</p><p>Dari tahun 2013 sampai sekarang secara perorangan maupun tim telah banyak pekerjaan - pekerjaan yang dipercayakan pada kami untuk pengerjaan Pemetaan, GIS, Feasibility Study, dan Web Development.</p><p>Kami percaya data geospasial & tata ruang wilayah yang well managed, dianalisa secara tepat dan mampu terintegrasi dengan teknologi informasi yang dapat diakses seluruh stakeholders, akan membantu proses pengambilan keputusan secara komprehensif & sustainable di era Industri Digital saat ini.</p>",
   });
 
   await Characteristic.insertMany([
@@ -115,11 +113,10 @@ async function up() {
  * Make any changes that UNDO the up function side effects here (if possible)
  */
 async function down() {
+  General.collection.drop();
+  Characteristic.collection.drop();
   Product.collection.drop();
   Partner.collection.drop();
-  General.collection.drop();
-  About.collection.drop();
-  Characteristic.collection.drop();
 }
 // export default { up, down };
 module.exports = { up, down };

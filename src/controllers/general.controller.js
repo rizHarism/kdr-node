@@ -7,6 +7,7 @@ async function get(req, res) {
     if (general) {
       general.logoImage = appUrl + general.logoImage;
       general.heroImage = appUrl + general.heroImage;
+      general.aboutImage = appUrl + general.aboutImage;
       res.status(200).json({
         status: "success",
         code: 200,
