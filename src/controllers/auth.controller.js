@@ -1,4 +1,5 @@
 const User = require("../../models/users");
+const Blacklist = require("../../models/blacklistToken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -94,7 +95,6 @@ async function Login(req, res) {
       data: user_data,
       message: "You have successfully logged in.",
     });
-    // res.redirect("/about");
   } catch (err) {
     console.log(err);
     res.status(500).json({
@@ -107,4 +107,30 @@ async function Login(req, res) {
   res.end();
 }
 
-module.exports = { Register, Login };
+async function Logout(req, res) {
+  try {
+    const cookieSession = req.cookies.SessionID; // get the session cookie from request header
+    console.log(cookieSession);
+    if (!cookieSession) return res.sendStatus(204); // No content
+    const checkIfBlacklisted = await Blacklist.findOne({ token: cookieSession }); // Check if that token is blacklisted
+    // if true, send a no content response.
+    console.log(checkIfBlacklisted);
+    if (checkIfBlacklisted) return res.sendStatus(204);
+    // otherwise blacklist token
+    const newBlacklist = new Blacklist({
+      token: cookieSession,
+    });
+    await newBlacklist.save();
+    // Also clear request cookie on client
+    res.setHeader("Clear-Site-Data", '"cookies"');
+    res.status(200).json({ message: "You are logged out!" });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
+    });
+  }
+  res.end();
+}
+
+module.exports = { Register, Login, Logout };
