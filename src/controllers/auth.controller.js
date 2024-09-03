@@ -79,7 +79,7 @@ async function Login(req, res) {
       });
 
     let options = {
-      maxAge: 20 * 60 * 1000, // would expire in 20minutes
+      maxAge: 24 * 60 * 60 * 1000, // would expire in 20minutes
       httpOnly: true, // The cookie is only accessible by the web server
       secure: true,
       sameSite: "None",
@@ -122,7 +122,8 @@ async function Logout(req, res) {
     });
     await newBlacklist.save();
     // Also clear request cookie on client
-    res.setHeader("Clear-Site-Data", '"cookies"');
+    // res.setHeader("Clear-Site-Data", "cookies");
+    res.clearCookie("SessionID");
     res.status(200).json({ message: "You are logged out!" });
   } catch (err) {
     res.status(500).json({
