@@ -1,44 +1,38 @@
 const express = require("express");
 const router = express.Router();
 const authRouter = require("./auth");
-const homeController = require("../controllers/home.controller");
-const articlesController = require("../controllers/article.controller");
-const characteristicController = require("../controllers/characteristic.controller");
-const generalController = require("../controllers/general.controller");
-const partnerController = require("../controllers/partner.controller");
-const productController = require("../controllers/product.controller");
+const homeController = require("../controllers/public/home.controller");
+const articlesController = require("../controllers/public/article.controller");
+const profileController = require("../controllers/admin/profile.controller");
+const characteristicController = require("../controllers/admin/characteristic.controller");
+const generalController = require("../controllers/admin/general.controller");
+const partnerController = require("../controllers/admin/partner.controller");
+const productController = require("../controllers/admin/product.controller");
 const { Verify } = require("../../middleware/verify");
-
-// router.get("/", (req, res) => {
-//   try {
-//     res.status(200).json({
-//       status: "success",
-//       appName: "KDR /API",
-//       version: 0.1,
-//       message: "Welcome to our KDR Application Programming Interface",
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//       status: "error",
-//       message: "Internal Server Error",
-//     });
-//   }
-// });
-
-// register user use authRouter
-router.use("/user", authRouter);
+const { UploadHandlerUserImage } = require("../../utils/multer-config");
 
 router.get("/", homeController.get);
-
-router.get("/articles", articlesController.getArticles);
+// public route for articles
+router.get("/articles", articlesController.get);
 router.get("/articles/:slug", articlesController.detailArticle);
 
-router.get("/general", Verify, generalController.get);
+// authRouter for register, login and logout user
+router.use("/auth", authRouter);
 
-router.get("/partners", Verify, partnerController.get);
+// ------------------ admin router ---------------------------- //
+// admin panel - profile page
+router.get("/admin/profile", Verify, profileController.get);
+router.put("/admin/profile", Verify, UploadHandlerUserImage.single("image"), profileController.update);
 
-router.get("/products", Verify, productController.get);
+// admin panel - general page
+router.get("/admin/general", Verify, generalController.get);
 
-router.get("/characteristic", Verify, characteristicController.get);
+// admin panel - partners page
+router.get("/admin/partners", Verify, partnerController.get);
+
+// admin panel - products page
+router.get("/admin/products", Verify, productController.get);
+
+router.get("/admin/characteristic", Verify, characteristicController.get);
 
 module.exports = router;

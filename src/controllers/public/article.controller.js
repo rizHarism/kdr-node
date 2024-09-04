@@ -1,9 +1,8 @@
-const { Articles } = require("../../utils/db");
+const { Articles } = require("../../../utils/db");
 const dotenv = require("dotenv");
 dotenv.config();
 
-async function getArticles(req, res) {
-  //   const appUrl = process.env.APP_URL;
+async function get(req, res) {
   try {
     const articles = await Articles.find({}, { _id: 0, __v: 0 });
     console.log(articles);
@@ -36,7 +35,6 @@ async function getArticles(req, res) {
 }
 
 async function detailArticle(req, res) {
-  //   const appUrl = process.env.APP_URL;
   try {
     const slug = req.params.slug;
     const article = await Articles.findOne({ slug: slug }, { _id: 0, __v: 0 });
@@ -70,4 +68,4 @@ async function detailArticle(req, res) {
   res.end();
 }
 
-module.exports = { getArticles, detailArticle };
+module.exports = { get, detailArticle };

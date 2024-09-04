@@ -1,4 +1,4 @@
-const Product = require("../../models/products");
+const Product = require("../../../models/products");
 const dotenv = require("dotenv");
 dotenv.config();
 const appUrl = process.env.APP_URL;

@@ -4,8 +4,8 @@ dotenv.config();
 require("./utils/db");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-
-const { uploadHandler } = require("./utils/multer-config");
+const multer = require("multer");
+const { UploadHandlerUserImage } = require("./utils/multer-config");
 const fs = require("fs");
 const port = process.env.PORT;
 const appRouter = require("./src/routes/index");
@@ -31,11 +31,21 @@ app.use((req, res, next) => {
 });
 
 app.use(appRouter);
-
-app.post("/user", uploadHandler.single("image"), (req, res) => {
-  console.log(req.file, req.body);
-  res.status(200);
-  res.send(req.body);
+const uploadAvatar = UploadHandlerUserImage.single("image");
+app.post("/user", (req, res) => {
+  console.log(req.file);
+  uploadAvatar(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      console.log(err);
+      return res.json({ message: err.message });
+    } else if (err) {
+      console.log(err);
+      return res.send({ message: err.message });
+    }
+    res.send(req.body);
+  });
+  // console.log(req.body);
+  // res.status(200);
 });
 
 // response 404

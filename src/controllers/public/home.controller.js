@@ -1,4 +1,4 @@
-const { General, Characteristic, Product, Partner } = require("../../utils/db");
+const { General, Characteristic, Product, Partner } = require("../../../utils/db");
 const dotenv = require("dotenv");
 dotenv.config();
 

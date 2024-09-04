@@ -1,19 +1,18 @@
-const Partner = require("../../models/partners");
+const General = require("../../../models/general");
 const dotenv = require("dotenv");
 dotenv.config();
 const appUrl = process.env.APP_URL;
-
 async function get(req, res) {
-  await Partner.find().then((partner) => {
-    if (partner.length > 0) {
-      partner.map((val) => {
-        val.image = appUrl + val.image;
-      });
+  await General.findOne().then((general) => {
+    if (general) {
+      general.logoImage = appUrl + general.logoImage;
+      general.heroImage = appUrl + general.heroImage;
+      general.aboutImage = appUrl + general.aboutImage;
       res.status(200).json({
         status: "success",
         code: 200,
-        path: "/partners",
-        data: partner,
+        path: "/general",
+        data: general,
         message: "Data about successfully retrieved",
       });
     } else {

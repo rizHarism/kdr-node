@@ -1,5 +1,5 @@
-const User = require("../../models/users");
-const Blacklist = require("../../models/blacklistToken");
+const User = require("../../../models/users");
+const Blacklist = require("../../../models/blacklistToken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
