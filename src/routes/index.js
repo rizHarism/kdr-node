@@ -17,7 +17,7 @@ router.get("/articles", articlesController.get);
 router.get("/articles/:slug", articlesController.detailArticle);
 
 // authRouter for register, login and logout user
-router.use("/auth", authRouter);
+router.use("/user", authRouter);
 
 // ------------------ admin router ---------------------------- //
 // admin panel - profile page

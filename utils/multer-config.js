@@ -9,11 +9,13 @@ const userImageStorage = multer.diskStorage({
   },
 });
 
-const imageFilter = (req, file, cb) => {
+const imageFilter = (req, file, next) => {
   if (file.mimetype == "image/png" || file.mimetype == "image/jpeg" || file.mimetype == "image/jpg") {
-    cb(null, true);
+    next(null, true);
+    req.file = file;
   } else {
-    cb(new Error("The type of file is not an image!"));
+    next(null, false);
+    req.file = null;
   }
 };
 
