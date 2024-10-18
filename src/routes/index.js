@@ -3,11 +3,14 @@ const router = express.Router();
 const authRouter = require("./auth");
 const homeController = require("../controllers/public/home.controller");
 const articlesController = require("../controllers/public/article.controller");
+
+// admin panel controller
 const profileController = require("../controllers/admin/profile.controller");
 const characteristicController = require("../controllers/admin/characteristic.controller");
 const generalController = require("../controllers/admin/general.controller");
 const partnerController = require("../controllers/admin/partner.controller");
 const productController = require("../controllers/admin/product.controller");
+const adminArticlesController = require("../controllers/admin/article.controller");
 const { Verify } = require("../../middleware/verify");
 const { UploadHandlerUserImage } = require("../../utils/multer-config");
 
@@ -23,6 +26,10 @@ router.use("/user", authRouter);
 // admin panel - profile page
 router.get("/admin/profile", Verify, profileController.get);
 router.put("/admin/profile", Verify, UploadHandlerUserImage.single("image"), profileController.update);
+
+// admin panel - article page
+router.get("admin/articles", Verify, articlesController.get);
+router.get("admin/articles/:slug", Verify, articlesController.detailArticle);
 
 // admin panel - general page
 router.get("/admin/general", Verify, generalController.get);
