@@ -28,8 +28,8 @@ router.get("/admin/profile", Verify, profileController.get);
 router.put("/admin/profile", Verify, UploadHandlerUserImage.single("image"), profileController.update);
 
 // admin panel - article page
-router.get("admin/articles", Verify, articlesController.get);
-router.get("admin/articles/:slug", Verify, articlesController.detailArticle);
+router.get("admin/articles", Verify, adminArticlesController.get);
+router.get("admin/articles/:slug", Verify, adminArticlesController.detailArticle);
 
 // admin panel - general page
 router.get("/admin/general", Verify, generalController.get);
